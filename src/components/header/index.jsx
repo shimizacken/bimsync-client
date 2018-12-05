@@ -6,6 +6,8 @@ export default class Header extends Component {
 
     render() {
 
+        console.log(styles);
+
         return(
             <header
                 className={styles.header}

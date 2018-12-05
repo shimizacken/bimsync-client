@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../../assets/Bimsync-icon-blue_rgb.png';
+import { Loader } from '../loader';
 import styles from './styles.scss';
 
 export default class Viewer extends Component {
@@ -44,6 +44,8 @@ export default class Viewer extends Component {
 
     render() {
 
+        console.log(styles);
+        
         return(
             <div>
                 <div
@@ -64,12 +66,7 @@ export default class Viewer extends Component {
                                                                 alignItems: 'center'
                                                             }}
                                                             >
-                                                                <img
-                                                                    src={logo}
-                                                                    width={25}
-                                                                    height={25}
-                                                                    title='bimsync'
-                                                                />
+                                                                <Loader />
                                                             </div>
                                                                 : null
                     }
