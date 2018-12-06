@@ -4,10 +4,20 @@
     height: 80vh;
     justify-content: center;
     align-items: center;
+
+    position: absolute;
+    width: 100%;
 }
 
 .loader-text-wrapper {
 
     font-size: 16px;
     margin-top: 20px;
+}
+
+.viewer-wrapper {
+
+    height: 80vh;
+    border: 1px solid gray;
+    background-color: #E5F1FF;
 }

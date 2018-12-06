@@ -116,6 +116,7 @@ export default class Viewer extends Component {
                     style={{
                         height: '80vh',
                         border: '1px solid gray',
+                        backgroundColor: '#E5F1FF'
                     }}
                     data-viewer='webgl'
                     data-url={this.accessUrlStore.url}
