@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import { Loader } from '../loader';
 import styles from './styles.scss';
 
+@inject('accessUrlStore') @observer
 export default class Viewer extends Component {
+
+    accessUrlStore = this.props.accessUrlStore;
 
     state = {
         viewerLoaded: false
     };
 
-    componentDidMount () {
+    componentDidUpdate() {
 
         const script = document.createElement('script');
 
@@ -44,8 +48,11 @@ export default class Viewer extends Component {
 
     render() {
         
-        console.log(styles);
-        
+        if (!this.accessUrlStore.url) {
+            
+            return null;
+        }
+
         return(
             <div>
                 <div
@@ -55,7 +62,7 @@ export default class Viewer extends Component {
                         border: '1px solid gray',
                     }}
                     data-viewer='webgl'
-                    data-url='https://api.bimsync.com/v2/projects/999d880dcef44d57b7dc1cc67ab094db/viewer3d/data?token=c489a4f9e25d47898606f5948f650106'
+                    data-url={this.accessUrlStore.url}
                 >
                     {
                         this.state.viewerLoaded !== true ? <div

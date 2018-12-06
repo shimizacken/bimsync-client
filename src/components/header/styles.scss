@@ -1,3 +1,5 @@
+@import '../../styles/_globals.scss';
+
 .header {
 
     display: flex;
@@ -9,5 +11,14 @@
 
     h3 {
         margin-left: 15px;
+    }
+
+    .access-url {
+
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 15px;
+        border: 1px solid $input-border-color;
+        width: 100%;
     }
 }

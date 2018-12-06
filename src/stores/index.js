@@ -1,5 +1,5 @@
-import accessUrl from './accessUrlStore';
+import accessUrlStore from './accessUrlStore';
 
 export default {
-    accessUrl
+    accessUrlStore
 };

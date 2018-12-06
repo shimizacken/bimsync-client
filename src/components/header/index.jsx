@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import logo from '../../assets/Bimsync-icon-blue_rgb.png';
 import styles from './styles.scss';
 
+@inject('accessUrlStore') @observer
 export default class Header extends Component {
+
+    accessUrlStore = this.props.accessUrlStore;
+
+    onChange = e => {
+
+        this.accessUrlStore.setUrl(e.target.value);
+    }
 
     render() {
 
@@ -21,14 +30,10 @@ export default class Header extends Component {
                         title='bimsync'
                     />
                 </div>
-                <div>
-                    <input
-                        
-                    />
-                </div>
-                <h3>
-                    
-                </h3>
+                <input
+                    className={styles.accessUrl}
+                    onChange={this.onChange}
+                />
             </header>
         );
     }
