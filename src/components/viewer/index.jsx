@@ -11,7 +11,7 @@ export default class Viewer extends Component {
     viewerUrl = 'https://api.bimsync.com/1.0/js/viewer.js';
 
     state = {
-        viewerLoaded: false,
+        displayLoder: false,
         modalIsOpen: false,
         isViewerScriptAdded: false
     };
@@ -49,7 +49,11 @@ export default class Viewer extends Component {
         }
     }
 
-    componentDidUpdate() {
+    initiateViewer = (e) => {
+
+        this.setState({
+            displayLoder: true
+        });
 
         this.removeViewerScriptTag();
 
@@ -63,7 +67,7 @@ export default class Viewer extends Component {
         $('.viewer').bind('viewer.load', () => {
 
             this.setState({
-                viewerLoaded: true
+                displayLoder: false
             });
 
             $('.viewer').viewer('viewpoint', {
@@ -105,12 +109,20 @@ export default class Viewer extends Component {
               right                 : 'auto',
               bottom                : 'auto',
               marginRight           : '-50%',
-              transform             : 'translate(-50%, -50%)'
+              transform             : 'translate(-50%, -50%)',
+              width: '50%'
             }
           };
 
         return(
             <div>
+                <div>
+                    <button
+                        onClick={this.initiateViewer}
+                    >
+                        Load Model
+                    </button>
+                </div>
                 <div
                     className='viewer'
                     style={{
@@ -122,7 +134,7 @@ export default class Viewer extends Component {
                     data-url={this.accessUrlStore.url}
                 >
                     {
-                        this.state.viewerLoaded !== true ? <div
+                        this.state.displayLoder === true ? <div
                                                                 className={styles.loaderWrapper}
                                                             >
                                                                 <div>
@@ -143,8 +155,22 @@ export default class Viewer extends Component {
                         style={customStyles}
                         contentLabel="Example Modal"
                     >
-                        <button onClick={this.closeModal}>close</button>
-                        <DialogContent />
+                        <div
+                            style={{
+                                padding: '10px'
+                            }}
+                        >
+                            <button
+                                onClick={this.closeModal}
+                            >
+                                Close
+                            </button>
+                        </div>
+                        <div
+                            className={styles.dialogContent}
+                        >
+                            <DialogContent />
+                        </div>
                     </Modal>
                 </div>
             </div>
