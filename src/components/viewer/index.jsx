@@ -43,7 +43,7 @@ export default class Viewer extends Component {
     }
 
     render() {
-
+        
         console.log(styles);
         
         return(
@@ -51,22 +51,24 @@ export default class Viewer extends Component {
                 <div
                     className='viewer'
                     style={{
-                        height: '600px',
+                        height: '80vh',
                         border: '1px solid gray',
                     }}
                     data-viewer='webgl'
-                    data-url='https://api.bimsync.com/v2/projects/999d880dcef44d57b7dc1cc67ab094db/viewer3d/data?token=43236f9d71e84ffca59fd1c89bd75bfc'
+                    data-url='https://api.bimsync.com/v2/projects/999d880dcef44d57b7dc1cc67ab094db/viewer3d/data?token=c489a4f9e25d47898606f5948f650106'
                 >
                     {
                         this.state.viewerLoaded !== true ? <div
-                                                            style={{
-                                                                display: 'flex',
-                                                                height: '600px',
-                                                                justifyContent: 'center',
-                                                                alignItems: 'center'
-                                                            }}
+                                                                className={styles.loaderWrapper}
                                                             >
-                                                                <Loader />
+                                                                <div>
+                                                                    <Loader />
+                                                                    <div
+                                                                        className={styles.loaderTextWrapper}
+                                                                    >
+                                                                        Loading...
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                                 : null
                     }

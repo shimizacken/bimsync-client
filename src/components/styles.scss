@@ -1,0 +1,36 @@
+@import '../styles/_globals.scss';
+
+html, body {
+
+    font-family: 'Ubuntu';
+    font-size: 16px;
+    color: $main-font-color;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+textarea, select, input, button {
+
+    outline: none;
+    font-family: inherit;
+    color: $main-font-color;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $placehoder-color;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $placehoder-color;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: $placehoder-color;
+}
+
+.main-wrapper {
+
+    padding: 25px;
+}

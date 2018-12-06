@@ -1,3 +1,13 @@
-.my-style {
-    width: 50px;
+.loader-wrapper {
+
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-text-wrapper {
+
+    font-size: 16px;
+    margin-top: 20px;
 }

@@ -6,8 +6,6 @@ export default class Header extends Component {
 
     render() {
 
-        console.log(styles);
-
         return(
             <header
                 className={styles.header}
@@ -21,6 +19,11 @@ export default class Header extends Component {
                         src={logo}
                         width={25}
                         title='bimsync'
+                    />
+                </div>
+                <div>
+                    <input
+                        
                     />
                 </div>
                 <h3>
