@@ -1,26 +1,65 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Loader } from '../loader';
+import Modal from 'react-modal';
+import { Loader, DialogContent } from '../loader';
 import styles from './styles.scss';
 
 @inject('accessUrlStore') @observer
 export default class Viewer extends Component {
 
     accessUrlStore = this.props.accessUrlStore;
+    viewerUrl = 'https://api.bimsync.com/1.0/js/viewer.js';
 
     state = {
-        viewerLoaded: false
+        viewerLoaded: false,
+        modalIsOpen: false,
+        isViewerScriptAdded: false
     };
+
+    openModal = () => {
+
+        this.setState({modalIsOpen: true});
+      }
+     
+    afterOpenModal = () => {
+        // references are now sync'd and can be accessed.
+        //this.subtitle.style.color = '#f00';
+    }
+     
+    closeModal = () => {
+
+        this.setState({modalIsOpen: false});
+    }
+
+    removeViewerScriptTag() {
+
+        $('.viewer').unbind('viewer.load');
+        $('.viewer').unbind('viewer.select');
+
+        const scripts = document.getElementsByTagName('script');
+
+        for (var i = scripts.length; i--;) {
+
+            const element = scripts[i];
+
+            if (element.src === this.viewerUrl) {
+
+                element.parentNode.removeChild(element);
+            }
+        }
+    }
 
     componentDidUpdate() {
 
+        this.removeViewerScriptTag();
+
         const script = document.createElement('script');
 
-        script.src = 'https://api.bimsync.com/1.0/js/viewer.js';
+        script.src = this.viewerUrl;
         script.async = true;
 
         document.body.appendChild(script);
-
+        
         $('.viewer').bind('viewer.load', () => {
 
             this.setState({
@@ -42,8 +81,14 @@ export default class Viewer extends Component {
                         "z":0.9001549510408244
                     },
                     "fov":60,"type":"perspective"
-                });
             });
+        });
+
+        $('.viewer').bind('viewer.select', (e, d) => {
+
+            //console.log('select!', [e, d]);
+            this.openModal();
+        });
     }
 
     render() {
@@ -52,6 +97,17 @@ export default class Viewer extends Component {
             
             return null;
         }
+
+        const customStyles = {
+            content : {
+              top                   : '50%',
+              left                  : '50%',
+              right                 : 'auto',
+              bottom                : 'auto',
+              marginRight           : '-50%',
+              transform             : 'translate(-50%, -50%)'
+            }
+          };
 
         return(
             <div>
@@ -79,6 +135,16 @@ export default class Viewer extends Component {
                                                             </div>
                                                                 : null
                     }
+                    <Modal
+                        isOpen={this.state.modalIsOpen}
+                        onAfterOpen={this.afterOpenModal}
+                        onRequestClose={this.closeModal}
+                        style={customStyles}
+                        contentLabel="Example Modal"
+                    >
+                        <button onClick={this.closeModal}>close</button>
+                        <DialogContent />
+                    </Modal>
                 </div>
             </div>
         );
