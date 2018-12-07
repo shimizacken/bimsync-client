@@ -32,6 +32,7 @@ export default class Header extends Component {
                 </div>
                 <input
                     className={styles.accessUrl}
+                    data-cy='access-url'
                     onChange={this.onChange}
                 />
             </header>

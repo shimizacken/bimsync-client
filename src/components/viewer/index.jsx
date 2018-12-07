@@ -161,6 +161,7 @@ export default class Viewer extends Component {
                     </button>
                 </div>
                 <div
+                    data-cy='viewer'
                     className='viewer'
                     style={{
                         height: '80vh',
