@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import Modal from 'react-modal';
 import { Loader, DialogContent } from '../loader';
+import { request } from '../../services/fetch';
 import styles from './styles.scss';
 
 @inject('accessUrlStore') @observer
@@ -90,7 +91,43 @@ export default class Viewer extends Component {
 
         $('.viewer').bind('viewer.select', (e, d) => {
 
-            //console.log('select!', [e, d]);
+            console.log('select!', [e, d]);
+
+            request(`https://api.bimsync.com/v2/projects/${'999d880dcef44d57b7dc1cc67ab094db'}/ifc/products/${d}`)
+                .then(result => {
+
+                    if (result.weather && result.weather.length > 0) {
+                        
+                        this.setState({
+                            cityName: ''
+                        });
+
+                        this.props.weather.setWeather(result);
+                        this.updateHistorylist(result);
+                    }
+                    else {
+
+                        if (result && result.message) {
+
+                            this.setState({
+                                errorMessage: result.message
+                            });
+                        }
+                    }
+                })
+                .catch(error => {
+
+                    this.setState({
+                        errorMessage: error
+                    });
+                })
+                .finally(_ => {
+
+                    this.setState({
+                        displayLoader: false
+                    });
+                });
+
             this.openModal();
         });
     }
