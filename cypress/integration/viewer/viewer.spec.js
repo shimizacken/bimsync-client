@@ -4,7 +4,7 @@ describe('viewer', () => {
 
         cy.visit('http://localhost:8777/')
     })
-
+    
     it('should load viewer', () => {
 
         cy.visit('http://localhost:8777/')
